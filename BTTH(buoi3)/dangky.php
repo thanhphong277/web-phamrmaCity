@@ -7,7 +7,7 @@ $password_db = "";
 $dbname = "pharmacity";
 
 $conn = mysqli_connect($servername, $username_db, $password_db, $dbname);
-
+//PhatCuBeo
 $thongbao = ""; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
