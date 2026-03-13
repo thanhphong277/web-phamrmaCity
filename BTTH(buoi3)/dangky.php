@@ -1,4 +1,5 @@
 <?php
+//hello anh phong
 // 1. KẾT NỐI DATABASE
 $servername = "localhost";
 $username_db = "root";
