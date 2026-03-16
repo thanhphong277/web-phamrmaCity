@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php
 // 1. KẾT NỐI DATABASE (Y chang trang đăng ký)
 $servername = "localhost";
@@ -27,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Bước B: Yêu cầu PHP đối chiếu mật khẩu nhập vào với chuỗi băm trong kho
         if (password_verify($password_nhap_vao, $mat_khau_trong_kho)) {
             $thongbao = "<div class='alert alert-success'>Đăng nhập thành công!</div>";
-            
+            $_SESSION['ten_khach_hang'] = $row['username'];
             header("Location: index.php");
             exit();
         } else {
@@ -38,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $thongbao = "<div class='alert alert-error'>Tên đăng nhập hoặc mật khẩu không chính xác</div>";
     }
 }
+
 ?>
 
 <!DOCTYPE html>

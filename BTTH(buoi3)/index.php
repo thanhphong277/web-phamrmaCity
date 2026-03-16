@@ -1,3 +1,12 @@
+<?php 
+session_start(); 
+if (!isset($_SESSION['ten_khach_hang'])) {
+    header("Location: dangnhap.php");
+    exit(); 
+}
+?>
+<!DOCTYPE html>
+<html lang="vi">
 <!doctype html>
 <html lang="vi">
   <head>
@@ -15,6 +24,7 @@
   </head>
   <body>
     <header>
+      
       <div class="container navbar">
         <div class="logo">
           <i class="fa-solid fa-heart-pulse"></i>
@@ -24,9 +34,20 @@
         <nav class="nav-links">
     <a href="index.php" class="active"><i class="fa-solid fa-wave-square"></i> Trang chủ</a>
     <a href="haha.php"><i class="fa-solid fa-bag-shopping"></i> Nhà thuốc</a>
-
-    </nav>
-
+        </nav>
+    <div class="auth-buttons">
+                <div class="user-menu">
+                    <button class="btn-user">
+                        <i class="fa-solid fa-user-circle"></i> Xin chào, <?php echo $_SESSION['ten_khach_hang']; ?> <i class="fa-solid fa-caret-down"></i>
+                    </button>
+                    
+                    <div class="dropdown-content">
+                        <a href="#"><i class="fa-solid fa-id-card"></i> Hồ sơ của tôi</a>
+                        <a href="#"><i class="fa-solid fa-clock-rotate-left"></i> Lịch sử mua hàng</a>
+                        <hr> <a href="trangchu.php" class="logout-text"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+                    </div>
+                </div>
+                </div>
     </header>
 
     <section class="container">
@@ -159,5 +180,26 @@
             </div>
         </div>
     </footer>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const nutUser = document.querySelector(".btn-user");
+    const menuXoXuong = document.querySelector(".dropdown-content");
+
+    if (nutUser && menuXoXuong) {
+        // 1. Khi bấm vào nút Tên người dùng
+        nutUser.addEventListener("click", function(event) {
+            event.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
+            menuXoXuong.classList.toggle("show"); // Bật/tắt menu
+        });
+
+        // 2. Khi bấm ra chỗ khác trên màn hình thì tự đóng menu lại
+        window.addEventListener("click", function(event) {
+            if (!menuXoXuong.contains(event.target) && !nutUser.contains(event.target)) {
+                menuXoXuong.classList.remove("show");
+            }
+        });
+    }
+});
+</script>
   </body>
 </html>
