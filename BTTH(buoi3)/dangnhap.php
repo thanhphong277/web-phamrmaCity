@@ -29,7 +29,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password_nhap_vao, $mat_khau_trong_kho)) {
             $thongbao = "<div class='alert alert-success'>Đăng nhập thành công!</div>";
             $_SESSION['ten_khach_hang'] = $row['username'];
-            header("Location: index.php");
+            $_SESSION['quyen_han'] = $row['role'];
+            if ($_SESSION['quyen_han'] == 1) {
+                header("Location: admin.php"); 
+            } else {
+                header("Location: index.php");
+            }
             exit();
         } else {
             $thongbao = "<div class='alert alert-error'>Tên đăng nhập hoặc mật khẩu không chính xác</div>";
