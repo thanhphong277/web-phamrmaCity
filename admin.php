@@ -23,7 +23,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'products';
 
 // Xử lý Xóa sản phẩm
 if (isset($_GET['xoa_id'])) {
-    $id_candi = $_GET['xoa_id'];
+    $id_candi = (int)$_GET['xoa_id']; // <-- Thêm (int) vào ngay trước $_GET
     mysqli_query($conn, "DELETE FROM products WHERE id = $id_candi");
     $thongbao = "<div class='alert alert-success' style='color: green; margin-bottom: 15px;'>Đã xóa sản phẩm thành công!</div>";
 }
@@ -66,13 +66,13 @@ if (isset($_GET['xoa_id'])) {
                 <i class="fa-solid fa-heart-pulse"></i> PharmaCity (Admin)
             </div>
             
-            <nav class="nav-links">
+        <nav class="nav-links" style="position: relative; z-index: 9999;">
                 <a href="admin.php?page=products" class="<?php echo $page=='products' ? 'active' : ''; ?>"><i class="fa-solid fa-boxes-stacked"></i> Sản phẩm</a>
                 <a href="admin.php?page=orders" class="<?php echo $page=='orders' ? 'active' : ''; ?>"><i class="fa-solid fa-file-invoice-dollar"></i> Đơn hàng</a>
                 <a href="admin.php?page=profile" class="<?php echo $page=='profile' ? 'active' : ''; ?>"><i class="fa-solid fa-address-card"></i> Hồ sơ</a>
             </nav>
 
-            <div class="auth-buttons">
+           <div class="auth-buttons" style="position: relative; z-index: 1;">
                 <div class="user-menu">
                     <button class="btn-user">
                         <i class="fa-solid fa-user-shield"></i> Chào: <?php echo $_SESSION['ten_khach_hang']; ?> <i class="fa-solid fa-caret-down"></i>
