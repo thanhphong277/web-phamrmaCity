@@ -78,7 +78,7 @@ if (!$conn) {
                     </button>
                     
                     <div class="dropdown-content">
-                        <a href="hosocuatoi.php"><i class="fa-solid fa-id-card"></i> Hồ sơ của tôi</a>
+                        <a href="hoso_admin.php"><i class="fa-solid fa-id-card"></i> Hồ sơ của tôi</a>
                         <a href="#"><i class="fa-solid fa-clock-rotate-left"></i> Lịch sử mua hàng</a>
                         <hr>
                         <a href="trangchu.php" class="logout-text"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
