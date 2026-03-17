@@ -171,16 +171,29 @@ if (isset($_GET['xoa_id'])) {
                 </tbody>
             </table>
 
-        <?php 
+     <?php 
         // ==========================================
         // GIAO DIỆN 3: HỒ SƠ ADMIN
         // ==========================================
         } elseif ($page == 'profile') { 
+            // Lấy tên admin đang đăng nhập
             $ten_admin = $_SESSION['ten_khach_hang'];
-            // Lấy thông tin từ database
-            $sql = "SELECT * FROM users WHERE fullname = '$ten_admin' LIMIT 1";
+            
+            // ĐÃ SỬA: Tìm đúng vào cột 'username' (Tên đăng nhập)
+            $sql = "SELECT * FROM users WHERE username = '$ten_admin' LIMIT 1";
             $result = mysqli_query($conn, $sql);
-            $admin_info = mysqli_fetch_assoc($result);
+            
+            // Kiểm tra và lấy dữ liệu an toàn
+            if(mysqli_num_rows($result) > 0) {
+                $admin_info = mysqli_fetch_assoc($result);
+            } else {
+                // Đề phòng lỗi, nếu không thấy thì tạo data ảo để không bị trắng trang
+                $admin_info = [
+                    'fullname' => 'Lỗi chưa lấy được tên',
+                    'username' => $ten_admin,
+                    'role' => 1
+                ];
+            }
         ?>
             <div class="admin-header-title">
                 <h2><i class="fa-solid fa-address-card"></i> Hồ sơ quản trị viên</h2>
