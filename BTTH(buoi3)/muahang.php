@@ -107,7 +107,7 @@ if (!$conn) {
                                 <?php if($row['image_url'] != "") { ?>
                                     <img src="<?php echo $row['image_url']; ?>" alt="<?php echo $row['name']; ?>">
                                 <?php } else { ?>
-                                    <span style="color: #9ca3af; font-size: 0.9rem;">Không có ảnh</span>
+                                    <span class="no-image-text">Không có ảnh</span>
                                 <?php } ?>
                                 <button class="btn-favorite"><i class="fa-regular fa-heart"></i></button>
                             </div>
@@ -116,7 +116,7 @@ if (!$conn) {
                                 <h3 class="product-title"><?php echo $row['name']; ?></h3>
                                 <p class="product-desc"><?php echo $row['description']; ?></p>
                                 <div class="product-footer">
-            <span class="product-price">$<?php echo $row['price']; ?></span>
+            <span class="product-price"><?php echo number_format($row['price'], 0, ',', '.'); ?> đ</span>
             <button class="btn-add-cart btn-yeucau-dangnhap"><i class="fa-solid fa-cart-plus"></i></button>
         </div>
                             </div>
@@ -179,7 +179,7 @@ if (!$conn) {
                         text: "Vui lòng đăng nhập hệ thống để có thể thêm sản phẩm vào giỏ hàng nhé.",
                         icon: "warning",
                         showCancelButton: true,
-                        confirmButtonColor: "#19a695", // Màu xanh ngọc của web bạn
+                        confirmButtonColor: "#19a695", 
                         cancelButtonColor: "#d33",
                         confirmButtonText: "Đến trang Đăng nhập",
                         cancelButtonText: "Để sau"

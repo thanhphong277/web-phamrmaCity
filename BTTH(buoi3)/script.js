@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (gioHang.length === 0) {
       divChuaHang.innerHTML =
         '<p style="text-align:center; color:#888; margin-top: 50px;">Chưa có sản phẩm nào trong giỏ.</p>';
-      theHienTongTien.innerText = "$0.00";
+      theHienTongTien.innerText = "0 đ";
       cucDoBaoSoLuong.style.display = "none";
       return;
     }
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="cart-item">
                     <div class="cart-item-info">
                         <h4>${monHang.name}</h4>
-                        <span class="cart-item-price">$${monHang.price.toFixed(2)}</span>
+                        <span class="cart-item-price">${monHang.price.toLocaleString("vi-VN")} đ</span>
                     </div>
                     <div class="qty-controls">
                         <button class="qty-btn" onclick="thayDoiSoLuong(${viTri}, -1)">-</button>
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
     });
     //Tính tổng
-    theHienTongTien.innerText = "$" + tongTien.toFixed(2);
+    theHienTongTien.innerText = tongTien.toLocaleString("vi-VN") + " đ";
     cucDoBaoSoLuong.style.display = "block";
     cucDoBaoSoLuong.innerText = tongSoLuong;
   }

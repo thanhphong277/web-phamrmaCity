@@ -941,3 +941,12 @@ footer {
   font-size: 12px;
   display: none; /* Mặc định giấu đi, khi nào có hàng JS mới bật lên block */
 }
+/* =========================================
+   NÚT GIỎ HÀNG VÀ CỤC ĐỎ BÁO SỐ LƯỢNG
+========================================= */
+/* Chữ báo Không có ảnh ở danh sách sản phẩm */
+.no-image-text {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  font-style: italic;
+}
