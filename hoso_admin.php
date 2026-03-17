@@ -8,12 +8,7 @@ if (!isset($_SESSION['ten_khach_hang']) || $_SESSION['quyen_han'] == 0) {
 }
 
 // 2. KẾT NỐI DATABASE
-$servername = "localhost";
-$username = "root"; 
-$password = "";     
-$dbname = "pharmacity";
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+require_once 'db.php';
 if (!$conn) {
     die("Kết nối thất bại: " . mysqli_connect_error());
 }

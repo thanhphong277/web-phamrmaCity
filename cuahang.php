@@ -9,12 +9,7 @@ if (!isset($_SESSION['ten_khach_hang'])) {
 <html lang="vi">
 <?php
 // 1. KẾT NỐI DATABASE
-$servername = "localhost";
-$username = "root"; // Mặc định của XAMPP
-$password = "";     // Mặc định của XAMPP không có mật khẩu
-$dbname = "pharmacity";
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+require_once 'db.php';
 
 // Kiểm tra kết nối
 if (!$conn) {

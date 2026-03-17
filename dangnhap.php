@@ -1,12 +1,7 @@
 <?php session_start(); ?>
 <?php
 // 1. KẾT NỐI DATABASE (Y chang trang đăng ký)
-$servername = "localhost";
-$username_db = "root";
-$password_db = "";
-$dbname = "pharmacity";
-
-$conn = mysqli_connect($servername, $username_db, $password_db, $dbname);
+require_once 'db.php';
 $thongbao = "";
 
 // 2. XỬ LÝ KHI BẤM NÚT ĐĂNG NHẬP

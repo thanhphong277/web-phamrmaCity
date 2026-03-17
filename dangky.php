@@ -1,12 +1,7 @@
 <?php
 //hello anh phong
 // 1. KẾT NỐI DATABASE
-$servername = "localhost";
-$username_db = "root";
-$password_db = "";
-$dbname = "pharmacity";
-
-$conn = mysqli_connect($servername, $username_db, $password_db, $dbname);
+require_once 'db.php';
 //PhatCuBeo
 $thongbao = ""; 
 
