@@ -1,205 +1,22 @@
 <?php 
 session_start(); 
-if (!isset($_SESSION['ten_khach_hang'])) {
-    header("Location: dangnhap.php");
-    exit(); 
-}
+require_once 'db.php'; 
 ?>
-<!DOCTYPE html>
-<html lang="vi">
-<!doctype html>
-<html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="hehe.css" />
-  </head>
-  <body>
-    <header>
-      
-      <div class="container navbar">
-        <div class="logo">
-          <i class="fa-solid fa-heart-pulse"></i>
-          PharmaCity
-        </div>
 
-        <nav class="nav-links">
-    <a href="index.php" class="active"><i class="fa-solid fa-wave-square"></i> Trang chủ</a>
-    <a href="haha.php"><i class="fa-solid fa-bag-shopping"></i> Nhà thuốc</a>
-        </nav>
-    <div class="auth-buttons">
-                <div class="user-menu">
-                    <button class="btn-user">
-                        <i class="fa-solid fa-user-circle"></i> Xin chào, <?php echo $_SESSION['ten_khach_hang']; ?> <i class="fa-solid fa-caret-down"></i>
-                    </button>
-                    
-                    <div class="dropdown-content">
-                        <a href="#"><i class="fa-solid fa-id-card"></i> Hồ sơ của tôi</a>
-                        <a href="#"><i class="fa-solid fa-clock-rotate-left"></i> Lịch sử mua hàng</a>
-                        <hr> <a href="trangchu.php" class="logout-text"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
-                    </div>
-                </div>
-                </div>
-    </header>
+<?php require_once 'header.php'; ?>
 
-    <section class="container">
-      <div class="hero-section">
-        <div class="hero-content">
-          <div class="badge">Y tế thế hệ mới</div>
-          <h1 class="hero-title">
-            Sức khỏe của bạn,<br /><span>Ưu tiên của chúng tôi.</span>
-          </h1>
-          <p class="hero-desc">
-            Trải nghiệm tương lai của ngành y tế. Nhận phân tích triệu chứng tức
-            thì, mua sắm vật tư y tế cao cấp tại cùng một nơi.
-          </p>
-          <nav class="hero-buttons">
-            <a href="#" class="btn btn-primary">Kiểm tra triệu chứng ngay</a>
-            <a href="haha.php" class="btn btn-outline">Mua thuốc</a>
-          </nav>
+<main>
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 class="hero-title">Sức Khỏe Của Bạn,<br />Ưu Tiên Của Chúng Tôi</h1>
+            <p class="hero-subtitle">Nhà thuốc trực tuyến đáng tin cậy cung cấp các loại thuốc chất lượng và lời khuyên y tế chuyên nghiệp ngay tại nhà bạn.</p>
+            <div class="hero-buttons">
+                <a href="<?php echo isset($_SESSION['ten_khach_hang']) ? 'cuahang.php' : 'cuahang_khach.php'; ?>" class="btn btn-primary btn-lg">
+                    Mua thuốc ngay <i class="fa-solid fa-arrow-right" style="margin-left: 8px"></i>
+                </a>
+            </div>
         </div>
-        <div class="hero-visual">
-          <div class="art-circle-2"></div>
-          <div class="art-circle-1"></div>
-        </div>
-      </div>
     </section>
+</main>
 
-    <section class="features-section">
-      <div class="container">
-        <div class="section-header">
-          <h2>Tại sao chọn PharmaCity</h2>
-          <p>
-            Chúng tôi kết hợp công nghệ tiên tiến với chuỗi cung ứng y tế đáng
-            tin cậy để mang đến cho bạn sự chăm sóc tốt nhất có thể.
-          </p>
-        </div>
-
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fa-solid fa-stethoscope"></i>
-            </div>
-            <h3>Kiểm tra triệu chứng</h3>
-            <p>
-              Nhận chuẩn đoán của bác sĩ qua kên chat.
-            </p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fa-regular fa-clock"></i>
-            </div>
-            <h3>Phục vụ 24/7</h3>
-            <p>
-              Truy cập nhà thuốc kỹ thuật số và các công cụ sức khỏe của chúng
-              tôi bất cứ lúc nào, ngày hay đêm.
-            </p>    
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fa-solid fa-shield-halved"></i>
-            </div>
-            <h3>Chất lượng đáng tin cậy</h3>
-            <p>
-              Tất cả các loại thuốc của chúng tôi có nguồn gốc trực tiếp từ các
-              nhà sản xuất đã được xác minh.
-            </p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fa-solid fa-bolt"></i>
-            </div>
-            <h3>Giao hàng nhanh chóng</h3>
-            <p>
-              Nhận các loại thuốc thiết yếu được giao đến tận cửa nhà bạn một
-              cách nhanh chóng.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta-section">
-      <div class="container">
-        <div class="cta-banner">
-          <h2>Cảm thấy không khỏe?</h2>
-          <p>
-            Mô tả các triệu chứng của bạn cho chúng tôi
-            và nhận các đề xuất tức thì về các bước tiếp theo cũng như các biện
-            pháp khắc phục không kê đơn.
-          </p>
-          <a href="#" class="btn btn-white"
-            >Bắt đầu chẩn đoán miễn phí
-            <i class="fa-solid fa-arrow-right" style="margin-left: 8px"></i
-          ></a>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <div class="logo">
-                        <i class="fa-solid fa-heart-pulse"></i>
-                        PharmaCity
-                    </div>
-                    <p>Nhà thuốc kỹ thuật số và người bạn đồng hành chăm sóc sức khỏe đáng tin cậy của bạn.</p>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Liên kết nhanh</h4>
-                    <ul>
-                        <li><a href="haha.php">Cửa hàng thuốc</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Pháp lý</h4>
-                    <ul>
-                        <li><a href="#">Chính sách bảo mật</a></li>
-                        <li><a href="#">Điều khoản dịch vụ</a></li>
-                        <li><a href="#">Tuyên bố từ chối trách nhiệm y tế</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>© 2026 PharmaCity. Chỉ mang tính chất cung cấp thông tin.</p>
-            </div>
-        </div>
-    </footer>
-    <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const nutUser = document.querySelector(".btn-user");
-    const menuXoXuong = document.querySelector(".dropdown-content");
-
-    if (nutUser && menuXoXuong) {
-        // 1. Khi bấm vào nút Tên người dùng
-        nutUser.addEventListener("click", function(event) {
-            event.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
-            menuXoXuong.classList.toggle("show"); // Bật/tắt menu
-        });
-
-        // 2. Khi bấm ra chỗ khác trên màn hình thì tự đóng menu lại
-        window.addEventListener("click", function(event) {
-            if (!menuXoXuong.contains(event.target) && !nutUser.contains(event.target)) {
-                menuXoXuong.classList.remove("show");
-            }
-        });
-    }
-});
-</script>
-  </body>
-</html>
+<?php require_once 'footer.php'; ?>
