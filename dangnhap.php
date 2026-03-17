@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 <?php
-// 1. KẾT NỐI DATABASE (Y chang trang đăng ký)
+// 1. KẾT NỐI DATABASE
 require_once 'db.php';
 $thongbao = "";
 
@@ -39,54 +39,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $thongbao = "<div class='alert alert-error'>Tên đăng nhập hoặc mật khẩu không chính xác</div>";
     }
 }
-
 ?>
 
 <?php require_once 'header.php'; ?>
-<body>
 
-    <header>
-        <div class="container navbar">
-            <div class="logo">
-                <i class="fa-solid fa-heart-pulse"></i> PharmaCity
+<main class="auth-wrapper">
+    <div class="auth-box">
+        <h2>Đăng nhập hệ thống</h2>
+        
+        <?php echo $thongbao; ?>
+
+        <form action="dangnhap.php" method="POST">
+            <div class="form-group">
+                <label for="username">Tên đăng nhập</label>
+                <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập" required>
             </div>
-            <nav class="nav-links">
-                <a href="trangchu.php"><i class="fa-solid fa-wave-square"></i> Trang chủ</a>
-                <a href="muahang.php"><i class="fa-solid fa-bag-shopping"></i> Nhà thuốc</a>
-            </nav>
-            <div class="auth-buttons">
-                <a href="dangky.php" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Đăng ký</a>
+
+            <div class="form-group">
+                <label for="password">Mật khẩu</label>
+                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
             </div>
+
+            <button type="submit" class="btn btn-outline btn-submit">
+                <i class="fa-solid fa-right-to-bracket"></i> Đăng nhập
+            </button>
+        </form>
+        
+        <div class="auth-link-text">
+            Chưa có tài khoản? <a href="dangky.php">Đăng ký ngay</a>
         </div>
-    </header>
+    </div>
+</main>
 
-    <main class="auth-wrapper">
-        <div class="auth-box">
-            <h2>Đăng nhập hệ thống</h2>
-            
-            <?php echo $thongbao; ?>
-
-            <form action="dangnhap.php" method="POST">
-                <div class="form-group">
-                    <label for="username">Tên đăng nhập</label>
-                    <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Mật khẩu</label>
-                    <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
-                </div>
-
-                <button type="submit" class="btn btn-outline btn-submit">
-                    <i class="fa-solid fa-right-to-bracket"></i> Đăng nhập
-                </button>
-            </form>
-            
-            <div class="auth-link-text">
-                Chưa có tài khoản? <a href="dangky.php">Đăng ký ngay</a>
-            </div>
-        </div>
-    </main>
-
-</body>
-</html>
+<?php require_once 'footer.php'; ?>

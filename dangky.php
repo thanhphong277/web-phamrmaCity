@@ -1,8 +1,7 @@
+<?php session_start(); ?>
 <?php
-//hello anh phong
 // 1. KẾT NỐI DATABASE
 require_once 'db.php';
-//PhatCuBeo
 $thongbao = ""; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -10,11 +9,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // BƯỚC A: Kiểm tra xem tên đăng nhập đã có ai dùng chưa (Dùng Prepared Statement)
+    // BƯỚC A: Kiểm tra xem tên đăng nhập đã có ai dùng chưa
     $check_sql = "SELECT id FROM users WHERE username = ?";
     $stmt_check = mysqli_prepare($conn, $check_sql);
     
-    // Gắn biến $username vào dấu "?" (chữ 's' đại diện cho kiểu String)
     mysqli_stmt_bind_param($stmt_check, "s", $username);
     mysqli_stmt_execute($stmt_check);
     mysqli_stmt_store_result($stmt_check);
@@ -25,19 +23,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // BƯỚC B: Băm mật khẩu 
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        // BƯỚC C: Cất thông tin vào database (Dùng Prepared Statement)
+        // BƯỚC C: Cất thông tin vào database
         $insert_sql = "INSERT INTO users (fullname, username, password) VALUES (?, ?, ?)";
         $stmt_insert = mysqli_prepare($conn, $insert_sql);
         
-        // Gắn 3 biến vào 3 dấu "?" ('sss' nghĩa là cả 3 đều là String)
         mysqli_stmt_bind_param($stmt_insert, "sss", $fullname, $username, $hashed_password);
         
         if (mysqli_stmt_execute($stmt_insert)) {
             $thongbao = "<div class='alert alert-success'>Đăng ký thành công! <a href='dangnhap.php'>Bấm vào đây để đăng nhập</a></div>";
         } else {
-            // Ở môi trường thực tế, nên ghi lỗi vào file log thay vì in ra màn hình
             $thongbao = "<div class='alert alert-error'>Đã xảy ra lỗi hệ thống, vui lòng thử lại sau.</div>";
-            // error_log("Lỗi đăng ký: " . mysqli_error($conn)); // Dùng cái này để lưu log ẩn
         }
         mysqli_stmt_close($stmt_insert);
     }
@@ -46,55 +41,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <?php require_once 'header.php'; ?>
-<body>
 
-    <header>
-        <div class="container navbar">
-            <div class="logo">
-                <i class="fa-solid fa-heart-pulse"></i> PharmaCity
+<main class="auth-wrapper">
+    <div class="auth-box">
+        <h2>Tạo tài khoản mới</h2>
+        
+        <?php echo $thongbao; ?>
+
+        <form action="dangky.php" method="POST">
+            <div class="form-group">
+                <label for="fullname">Họ và tên</label>
+                <input type="text" id="fullname" name="fullname" placeholder="VD: Nguyễn Văn A" required>
             </div>
-            <nav class="nav-links">
-                <a href="trangchu.php"><i class="fa-solid fa-wave-square"></i> Trang chủ</a>
-                <a href="muahang.php"><i class="fa-solid fa-bag-shopping"></i> Nhà thuốc</a>
-            </nav>
-            <div class="auth-buttons">
-                <a href="dangnhap.php" class="btn btn-outline"><i class="fa-solid fa-right-to-bracket"></i> Đăng nhập</a>
+
+            <div class="form-group">
+                <label for="username">Tên đăng nhập</label>
+                <input type="text" id="username" name="username" placeholder="Viết liền, không dấu" required>
             </div>
+
+            <div class="form-group">
+                <label for="password">Mật khẩu</label>
+                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu của bạn" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-submit">
+                <i class="fa-solid fa-user-plus"></i> Đăng ký ngay
+            </button>
+        </form>
+        
+        <div class="auth-link-text">
+            Đã có tài khoản? <a href="dangnhap.php">Đăng nhập</a>
         </div>
-    </header>
+    </div>
+</main>
 
-    <main class="auth-wrapper">
-        <div class="auth-box">
-            <h2>Tạo tài khoản mới</h2>
-            
-            <?php echo $thongbao; ?>
-
-            <form action="dangky.php" method="POST">
-                <div class="form-group">
-                    <label for="fullname">Họ và tên</label>
-                    <input type="text" id="fullname" name="fullname" placeholder="VD: Nguyễn Văn A" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="username">Tên đăng nhập</label>
-                    <input type="text" id="username" name="username" placeholder="Viết liền, không dấu" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Mật khẩu</label>
-                    <input type="password" id="password" name="password" placeholder="Nhập mật khẩu của bạn" required>
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-submit">
-                    <i class="fa-solid fa-user-plus"></i> Đăng ký ngay
-                </button>
-            </form>
-            
-            <div class="auth-link-text">
-                Đã có tài khoản? <a href="dangnhap.php">Đăng nhập</a>
-            </div>
-        </div>
-    </main>
-
-</body>
-</html>
+<?php require_once 'footer.php'; ?>
